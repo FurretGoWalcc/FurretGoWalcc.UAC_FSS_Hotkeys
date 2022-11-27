@@ -2,7 +2,7 @@ This is basically a bunch of hotkeys I've compiled to help with playing FSS and 
 # Hotkeys
 ## General
 I've included a couple general hotkeys with this script which have been personally helpful but are not directly related to FSS.
-![](generalhotkeys.md)
+![](generalhotkeys.png)
 1. Fireteam TL Designate is mapped to `Xbutton2`, which for me is the top button on my mouse. This simulates a middle-mouse press, which for me is very helpful since my mine is broken, but in general is a better mapping for it because you do not have to move fingers from the left or right mouse buttons.
 2. <u> Inventory</u>: 
 	1. Press a number key 2-6 to activate numpad 2-6. If your SC2 inventory buttons are mapped to numpad, this means that you can simulate clicking on the inventory by pressing a convenient number key.
@@ -11,7 +11,7 @@ I've included a couple general hotkeys with this script which have been personal
 
 ## Shelling
 These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled when the program is started**. You can toggle them On/Off by using `ctrl+alt+s`
-![](shellmodehotkeys.md)
+![](shellmodehotkeys.png)
 
 <u> Shell Count</u>: 
 - Use `s+#` to adjust shell count. Ex: entering `s`, then `5`, would set to 5 shells.
