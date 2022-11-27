@@ -8,8 +8,9 @@ Angle := 0
 Shell := 1
 Radius := 1
 Interval := 0.8000
-tempInterval := 0
+Movespeed := 0
 
+Tracking := true ; Shell config used
 ; A couple variables used for conditional hotkeys
 DisableInventory := false
 DisableHotkeys := false ; prevents a second trigger when recieving Input
@@ -32,24 +33,16 @@ return
 
 ; Saturation, Spam some shells in a line going backwards
 `::
-if(Radius==1) { ; ...then we should turn on saturation
-	Radius=2.4
-	SendInput % "{Enter}-r " . Radius  . "{Enter}"
-	SendInput % "{Enter}-i 0.2{Enter}"
-}
-else { ; ...turn off saturation
-	Radius=1
-	SendInput % "{Enter}-r " . Radius  . "{Enter}"
-	SendInput % "{Enter}-i " . Interval  . "{Enter}"
-}
+Tracking := !Tracking
+SendShell()
 return
 
-
+; When someone is manually typing, don't trigger hotkeys!
 Enter::
 SendInput, {Enter}
 DisableHotkeys := true
 ; MsgBox, "Hotkeys disabled"
-Input, InputVar,V * T10,{Enter}{Escape},
+Input, InputVar,V * T15,{Enter}{Escape},
 if(InStr(ErrorLevel, "EndKey:")) {
 	; MsgBox, "Hotkeys back on"
 	DisableHotkeys := false
@@ -67,21 +60,12 @@ if (ErrorLevel = "Match") {
 	if (InputVar = "s") {
 		Input, InputVar2, L1 T1,,1,2,3,4,5
 		if (ErrorLevel = "Match") {
-			if(Shell = 1)
-				SendInput % "{Enter}-d " . Angle  . "{Enter}" ; d 0 is more accurate than d c with 1 shell
 			Shell := InputVar2+5
 		}
 	}
-	else if (Shell = 1 and InputVar != 1 and InputVar != "s") {
-		SendInput % "{Enter}-d " . Angle  . "{Enter}" ; d 0 is more accurate than d c with 1 shell
+	else
 		Shell := InputVar
-	}
-	else {
-		SendInput % "{Enter}-d " . 0  . "{Enter}"
-		Shell := InputVar
-	}
-	SendInput % "{Enter}-s " . Shell  . "{Enter}"
-	
+	SendShell()
 	RefreshGui()
 }
 DisableHotkeys := false
@@ -96,44 +80,29 @@ if (ErrorLevel = "Match") {
 	switch InputVar {
 		case "q":
 		Angle := 135
-		SendInput % "{Enter}-d " . Angle  . "{Enter}"
-		RefreshGui()
 		case "w":
 		Angle := 90
-		SendInput % "{Enter}-d " . Angle  . "{Enter}"
-		RefreshGui()
 		case "e":
 		Angle := 45
-		SendInput % "{Enter}-d " . Angle  . "{Enter}"
-		RefreshGui()
 		case "d":
 		Angle := 360
-		SendInput % "{Enter}-d " . Angle  . "{Enter}"
-		RefreshGui()
 		case "c":
 		Angle := 315
-		SendInput % "{Enter}-d " . Angle  . "{Enter}"
-		RefreshGui()
 		case "x":
 		Angle := 270
-		SendInput % "{Enter}-d " . Angle  . "{Enter}"
-		RefreshGui()
 		case "z":
 		Angle := 225
-		SendInput % "{Enter}-d " . Angle  . "{Enter}"
-		RefreshGui()
 		case "a":
 		Angle := 180
-		SendInput % "{Enter}-d " . Angle  . "{Enter}"
-		RefreshGui()
 		case "s":
 		Angle := "c"
-		SendInput % "{Enter}-d " . Angle  . "{Enter}"
-		SendInput % "{Enter}-i 0.2{Enter}"
-		RefreshGui()
+		Interval := 0.2
+		Movespeed := 5
 		case "g":
 		SendInput g
 	}
+	SendShell()
+	RefreshGui()
 }
 DisableHotkeys := false
 return
@@ -146,31 +115,43 @@ if (ErrorLevel = "Match") {
 	switch InputVar {
 		case 1:
 		Interval := 0.4000 ; 2.50
-		SendInput % "{Enter}-i " . Interval  . "    2.5{Enter}"
+		Movespeed := 2.50
 		case 2:
 		Interval := 0.3636 ; 2.75
-		SendInput % "{Enter}-i " . Interval  . "    2.75{Enter}"
+		Movespeed := 2.75
 		case 3:
 		Interval := 0.3333 ; 3
-		SendInput % "{Enter}-i " . Interval  . "    3{Enter}"
+		Movespeed := 3.00
 		case 4:
 		Interval := 0.3077 ; 3.25
-		SendInput % "{Enter}-i " . Interval  . "    3.25{Enter}"
+		Movespeed := 3.25
 		case 5:
 		Interval := 0.2857 ; 3.5
-		SendInput % "{Enter}-i " . Interval  . "    3.5{Enter}"
+		Movespeed := 3.50
 		case 6:
 		Interval := 0.2667 ; 3.75
-		SendInput % "{Enter}-i " . Interval  . "    3.75{Enter}"
+		Movespeed := 3.75
 		case 7:
 		Interval := 0.2500 ; 4
-		SendInput % "{Enter}-i " . Interval  . "    4{Enter}"	
+		Movespeed := 4.00	
 	}
+	SendShell()
 	RefreshGui()
 }
 DisableInventory := false
 return
 
+SendShell() {
+	global
+	if(Tracking) {
+		str := "{enter}-c " . Shell . " " . Angle . " " . Interval . " " . Radius . "     " . Movespeed . " Tracking{enter}" 
+	}
+	else {
+		str := "{enter}-c " . Shell . " " . Angle . " 0.2 2.4     Saturation{enter}"
+	}
+	SendInput % str
+	return
+}
 
 #If ; End Shell mode code
 
