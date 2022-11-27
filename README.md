@@ -37,9 +37,9 @@ These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled
 - Saturation is all about getting shells on the ground quickly to hit low HP targets and lower IL. 
 	- Here is a rough Desmos graph of what saturation looks like:
 	
-	![](saturation.PNG)
+	![](saturation.png)
 	
-	- The black circles represent areas where full shell damage is done, the orange is 60%, and blue is 40%
+	- The red circles represent areas where full shell damage is done, the blue is 60%, and green is 40%. At 4k damage a shell, anywhere you get two greens overlapping or one blue is enough to kill a hunter/yeti in non UT1 modes (>2k damage).
 	- Basically, the radius is set so that the pattern above is gonna be right for units moving at 3.0 movespeed at a shell interval of 0.2. 
 	- You can add more shells to this mode to make it longer, and adjust the direction, but changing interval has no effect.
 	- Saturation is designed to be fire backwards rather than forwards, which  makes it easier to time to hit the first unit in a train of hunters/yetis/cursed/lacs.
