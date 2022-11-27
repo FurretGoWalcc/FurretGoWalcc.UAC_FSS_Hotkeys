@@ -36,7 +36,9 @@ These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled
 - Tracking is best suited for shelling accurately or having your shells "track" a target. This is the default
 - Saturation is all about getting shells on the ground quickly to hit low HP targets and lower IL. 
 	- Here is a rough Desmos graph of what saturation looks like:
-	![](saturation.png)
+	
+	![](saturation.PNG)
+	
 	- The black circles represent areas where full shell damage is done, the orange is 60%, and blue is 40%
 	- Basically, the radius is set so that the pattern above is gonna be right for units moving at 3.0 movespeed at a shell interval of 0.2. 
 	- You can add more shells to this mode to make it longer, and adjust the direction, but changing interval has no effect.
