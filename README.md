@@ -27,7 +27,7 @@ These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled
 
 <u> Directional</u>: 
 - Press `g+{q,w,e,d,c,x,z,a,s}` to change direction
-- Imagine a circle centered on the `s` key, with 0 degrees being West and 90 degrees being North. Doing `g+e` gives you a shell that moves towards 45 degrees. Doing `g+x` gives you a shell that moves 270 degrees. 
+- Imagine a circle centered on the `s` key, with 0 degrees being West and 90 degrees being North. Doing `g+e` gives you a shell that moves towards 45 degrees. Doing `g+x` gives you a shell that moves towards 270 degrees. 
 - `g+s` sets your direction to `-d c` and interval as fast as possible (`-i 0.2`, which lines up with movespeed of 5.0). This is unrecommended because it builds bad habits and can waste shells, but I included it because when you are shelling with 2 or less shells, direction isn't quite as important. You will have to set movespeed back manually after using circular shells.
 
 <u> Shelling Mode</u>: 
