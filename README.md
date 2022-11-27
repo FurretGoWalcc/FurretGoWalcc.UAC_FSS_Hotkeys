@@ -8,7 +8,7 @@ I've included a couple general hotkeys with this script which have been helpful 
 1. Fireteam TL Designate is mapped to `Xbutton2`, which for me is the top button on my mouse. This simulates a middle-mouse press, which for me is very helpful since my mine is broken, but in general is a better mapping for it because you do not have to move fingers from the left or right mouse buttons.
 2. <u> Inventory</u>: 
 	1. Press a number key 2-6 to activate numpad 2-6. If your SC2 inventory buttons are mapped to numpad, this means that you can simulate clicking on the inventory by pressing a convenient number key.
-	2. To swap between Inventory and Control-Group Mode, use the lower button on the mouse, `XButton1`
+	2. To turn Inventory Hotkeys On/Off, use the lower button on the mouse, `XButton1`
 	3. The inventory hotkey's can be manually adjusted in SC2, but I disliked the idea of using an inventory system that would conflict with my control groups while playing PL.
 
 ## Shelling
