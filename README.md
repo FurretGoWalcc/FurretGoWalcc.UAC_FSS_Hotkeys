@@ -41,6 +41,7 @@ These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled
 
 ## Understanding the Shelling Output
 Every time you change a parameter, the program will send out the unified command to adjust the parameters ingame plus some additional info which may be helpful.
+
 ![](shellmodeoutput.jpg)
 Shell, direction, interval, and radius should be self-explanatory at this point. The first extra thing added is the movement speed that you are set to. The second is the mode you are in (Tracking/Saturation).
 
