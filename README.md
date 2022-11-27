@@ -11,6 +11,7 @@ I've included a couple general hotkeys with this script which have been personal
 
 ## Shelling
 These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled when the program is started**. You can toggle them On/Off by using `ctrl+alt+s`
+
 ![](shellmodehotkeys.png)
 
 <u> Shell Count</u>: 
