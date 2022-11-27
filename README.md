@@ -1,7 +1,7 @@
 This is basically a bunch of hotkeys I've compiled to help with playing FSS and UAC in general.
 # Hotkeys
 ## General
-I've included a couple general hotkeys with this script which have been personally helpful but are not directly related to FSS.
+I've included a couple general hotkeys with this script which have been helpful but are not directly related to FSS.
 
 ![](generalhotkeys.png)
 
