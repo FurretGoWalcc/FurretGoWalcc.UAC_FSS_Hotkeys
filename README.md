@@ -22,8 +22,8 @@ These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled
 
 <u> Interval/Movespeed</u>: 
 - Use `caps-lock+#` to get interval. 
-- Because interval is unintuitive, I've abstracted it away. Pressing `caps+`1 gives you an interval that makes your shells move at 2.5 movespeed, and then each number greater than 1 increases it by 0.25 movespeed. Ex: `caps+7` gives 4 movespeed shells.
-- For those uninitiated in the greater theory of shellonomics, most things move around 3.00 movespeed, so start there and adjust as needed.
+- Because interval is unintuitive, I've abstracted it away. Pressing `caps+1` gives you an interval that makes your shells move at 2.5 movespeed, and then each number greater than 1 increases it by 0.25 movespeed. Ex: `caps+7` gives 4 movespeed shells.
+- For those uninitiated in the greater theory of shellonomics, most things move around 3.00 movespeed, so start at `caps+3` and adjust as needed.
 
 <u> Directional</u>: 
 - Press `g+{q,w,e,d,c,x,z,a,s}` to change direction
