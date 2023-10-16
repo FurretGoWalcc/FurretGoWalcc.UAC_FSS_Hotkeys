@@ -10,7 +10,7 @@ I've included a couple general hotkeys with this script which have been helpful 
 	1. Press a number key 2-6 to activate numpad 2-6. If your SC2 inventory buttons are mapped to numpad, this means that you can simulate clicking on the inventory by pressing a convenient number key.
 	2. To turn Inventory Hotkeys On/Off, use the lower button on the mouse, `XButton1`
 	3. The inventory hotkey's can be manually adjusted in SC2, but I disliked the idea of using an inventory system that would conflict with my control groups while playing PL.
-	4. `Ctrl-alt-d` now disables and enables `2` inventory hotkey, so it is always availiable for control groups (like group 1). Helpful when playing classes like JTAC/Ghost who needs control group two open, or for BBs.
+	4. `Ctrl-alt-d` now disables and enables `2` inventory hotkey, so it is always available for control groups (like group 1). Helpful when playing classes like JTAC/Ghost who needs control group two open, or for BBs.
 
 ## Shelling
 These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled when the program is started**. You can toggle them On/Off by using `ctrl+alt+s`
