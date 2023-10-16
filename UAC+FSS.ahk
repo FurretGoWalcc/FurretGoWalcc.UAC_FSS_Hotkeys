@@ -1,24 +1,21 @@
-#NoEnv
+﻿#NoEnv
 #KeyHistory 0
 ListLines Off
 InvMode := false
 ShellMode := false
 InputVar := 0
 Angle := 0
+Cardinal := "E"
 Shell := 1
 Radius := 1
-Interval := 0.8000
-Movespeed := 0
+Interval := 0.3333
+Movespeed := 3.00
 
 Tracking := true ; Shell config used
 ; A couple variables used for conditional hotkeys
 DisableInventory := false
-DisableHotkeys := false ; prevents a second trigger when recieving Input
-
-^!s::
-ShellMode := !ShellMode
-RefreshGui()
-return
+DisableHotkeys := false ; prevents a second hotkey trigger when recieving Input
+DisableNumTwo := false ; on MOS like ghost, having control group 2 always selectable is more important than inventory
 
 #If WinActive("ahk_class StarCraft II")
 
@@ -27,8 +24,6 @@ SendInput {MButton}
 return
 
 ; Begin Shell Mode Code:
-
-; Shells
 #If WinActive("ahk_class StarCraft II") and ShellMode and not DisableHotkeys
 
 ; Saturation, Spam some shells in a line going backwards
@@ -41,17 +36,16 @@ return
 Enter::
 SendInput, {Enter}
 DisableHotkeys := true
-; MsgBox, "Hotkeys disabled"
 Input, InputVar,V * T15,{Enter}{Escape},
 if(InStr(ErrorLevel, "EndKey:")) {
-	; MsgBox, "Hotkeys back on"
 	DisableHotkeys := false
 }
-else if (ErrorLevel = "Timeout")
+else if (ErrorLevel = "Timeout") {
 	DisableHotkeys := false
-	; MsgBox, "Hotkeys back on"
+}
 return
 
+; Shell Count
 s::
 DisableHotkeys := true
 DisableInventory := true
@@ -66,7 +60,6 @@ if (ErrorLevel = "Match") {
 	else
 		Shell := InputVar
 	SendShell()
-	RefreshGui()
 }
 DisableHotkeys := false
 DisableInventory := false
@@ -79,30 +72,39 @@ Input, InputVar, L1 T1,,a,q,w,e,d,c,x,z,s,g
 if (ErrorLevel = "Match") {
 	switch InputVar {
 		case "q":
-		Angle := 135
+		Angle := "135"
+		Cardinal := "NW"
 		case "w":
-		Angle := 90
+		Angle := "90  "
+		Cardinal := "N "
 		case "e":
-		Angle := 45
+		Angle := "45  "
+		Cardinal := "NE"
 		case "d":
-		Angle := 360
+		Angle := "360"
+		Cardinal := "E "
 		case "c":
-		Angle := 315
+		Angle := "315"
+		Cardinal := "SE"
 		case "x":
-		Angle := 270
+		Angle := "270"
+		Cardinal := "S "
 		case "z":
-		Angle := 225
+		Angle := "225"
+		Cardinal := "SW"
 		case "a":
-		Angle := 180
+		Angle := "180"
+		Cardinal := "W "
 		case "s":
 		Angle := "c"
-		Interval := 0.2
-		Movespeed := 5
-		case "g":
-		SendInput g
+		Cardinal := "  "
+		case "g": {
+			SendInput g
+			DisableHotkeys := false
+			return
+		}
 	}
 	SendShell()
-	RefreshGui()
 }
 DisableHotkeys := false
 return
@@ -136,7 +138,6 @@ if (ErrorLevel = "Match") {
 		Movespeed := 4.00	
 	}
 	SendShell()
-	RefreshGui()
 }
 DisableInventory := false
 return
@@ -144,10 +145,15 @@ return
 SendShell() {
 	global
 	if(Tracking) {
-		str := "{enter}-c " . Shell . " " . Angle . " " . Interval . " " . Radius . "     " . Movespeed . " Tracking{enter}" 
+		if(Angle="c") {
+			str := "{enter}-c " . Shell . " c 0.2 " . Radius . "     5.00 Stationary{enter}"
+		}
+		else {
+			str := "{enter}-c " . Shell . " " . Angle . " " . Interval . " " . Radius . "     " . Movespeed . " " . Cardinal . "{enter}" 
+		}
 	}
 	else {
-		str := "{enter}-c " . Shell . " " . Angle . " 0.2 2.4     Saturation{enter}"
+		str := "{enter}-c " . Shell . " " . Angle . " 0.2 2.4      " . Cardinal . " Saturation{enter}"
 	}
 	SendInput % str
 	return
@@ -158,29 +164,23 @@ SendShell() {
 ; Swap Between Ctrl Group and Inventory Numbers
 XButton1::
 InvMode := !InvMode
-RefreshGui()
 return
 
-RefreshGui() {
-	global
-	Gui, Destroy
-	Gui +LastFound +ToolWindow +
-	Gui, Color, 0e1117
-	Gui, Font,Q3 s30 w600
-	str := InvMode ? "Inventory" : "CtrlGroup"
-	if(ShellMode)
-		str := % str . "    S: " . Shell .  "    I: " . IntervalArray[Interval] . "    D: " . Angle
-	Gui, Add, Text,R1 H10  C00FFFF, % str
-	; WinSet, TransColor, 0e1117 150
-	Gui -Caption
-	Gui, Show, x2000 y0 NoActivate
-	return
-}
+^!s::
+ShellMode := !ShellMode
+return
 
-#If InvMode and not DisableInventory
+^!d::
+DisableNumTwo := !DisableNumTwo
+return
+
 SetNumLockState, On
+
+; Map numbers to numpad if InvMode
+#If InvMode and not DisableInventory and not DisableNumTwo
 2::SendInput {Numpad2}
 return
+#If InvMode and not DisableInventory
 3::SendInput {Numpad3}
 return
 4::SendInput {Numpad4} 
@@ -190,24 +190,7 @@ return
 6::SendInput {Numpad6} 
 return
 #If
-
 ^e::
 Gui, Hide
 ExitApp
 return
-
-/*RefreshGui() {
-	global
-	Gui, Destroy
-	Gui +LastFound +AlwaysOnTop +ToolWindow +Disabled
-	Gui, Color, EEAA99
-	Gui, Font,Q3 s15 w600
-	str := InvMode ? "Inventory" : "CtrlGroup"
-	if(ShellMode)
-		str := % str . "    S: " . Shell .  "    I: " . IntervalArray[Interval] . "    D: " . Angle
-	Gui, Add, Text,R1 H10  C00FFFF, % str
-	; WinSet, TransColor, EEAA99 150
-	Gui -Caption
-	Gui, Show, x1300 y0 NoActivate
-	return
-}/*
