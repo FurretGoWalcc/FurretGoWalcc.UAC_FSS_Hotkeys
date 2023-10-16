@@ -10,6 +10,7 @@ I've included a couple general hotkeys with this script which have been helpful 
 	1. Press a number key 2-6 to activate numpad 2-6. If your SC2 inventory buttons are mapped to numpad, this means that you can simulate clicking on the inventory by pressing a convenient number key.
 	2. To turn Inventory Hotkeys On/Off, use the lower button on the mouse, `XButton1`
 	3. The inventory hotkey's can be manually adjusted in SC2, but I disliked the idea of using an inventory system that would conflict with my control groups while playing PL.
+	4. `Ctrl-alt-d` now disables and enables `2` inventory hotkey, so it is always availiable for control groups (like group 1). Helpful when playing classes like JTAC/Ghost who needs control group two open, or for BBs.
 
 ## Shelling
 These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled when the program is started**. You can toggle them On/Off by using `ctrl+alt+s`
@@ -41,7 +42,7 @@ These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled
 	
 	- The red circles represent areas where full shell damage is done, the blue is 60%, and green is 40%. At 4k damage a shell, anywhere you get two greens overlapping or one blue is enough to kill a hunter/yeti in non UT1 modes (>2k damage).
 	- Basically, the radius is set so that the pattern above is gonna be right for units moving at 3.0 movespeed at a shell interval of 0.2. 
-	- You can add more shells to this mode to make it longer, and adjust the direction, but changing interval has no effect.
+	- You can add more shells to this mode to make it longer, and adjust the direction, but changing interval has no effect on the command that will be sent out.
 	- Saturation is designed to be fire backwards rather than forwards, which  makes it easier to time to hit the first unit in a train of hunters/yetis/cursed/lacs.
 
 ## Understanding the Shelling Output
@@ -53,7 +54,7 @@ Shell, direction, interval, and radius should be self-explanatory at this point.
 
 # Installation
 Basically there's two options:
-1. Download the compiled .exe and double click it to start up the hotkey like any other program
+1. Download the compiled .exe from the releases tab of Github and double click it to start up the hotkey like any other program. It's set to not trigger any hotkeys unless SC2 is open.
 2. If you distrust downloading the program directly, cannot use the compiled version for one reason or another, or want to edit the script yourself, you can either compile it from source or run the .ahk file directly.
 	1. Either way, you will want to go grab a version of AHK at https://www.autohotkey.com/.
 	2. If you are compiling, go look at the docs at https://www.autohotkey.com/docs/Scripts.htm#ahk2exe for guidance.
