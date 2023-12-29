@@ -10,6 +10,7 @@ Shell := 1
 Radius := 1
 Interval := 0.3333
 Movespeed := 3.00
+Rockets := 0
 
 Tracking := true ; Shell config used
 ; A couple variables used for conditional hotkeys
@@ -37,12 +38,7 @@ Enter::
 SendInput, {Enter}
 DisableHotkeys := true
 Input, InputVar,V * T15,{Enter}{Escape},
-if(InStr(ErrorLevel, "EndKey:")) {
-	DisableHotkeys := false
-}
-else if (ErrorLevel = "Timeout") {
-	DisableHotkeys := false
-}
+DisableHotkeys := false
 return
 
 ; Shell Count
@@ -112,7 +108,7 @@ return
 ; Interval
 CapsLock::
 DisableInventory := true
-Input, InputVar, L1 T1,,,1,2,3,4,5,6,7
+Input, InputVar, L1 T1,,,1,2,3,4,5,6,7,8
 if (ErrorLevel = "Match") {
 	switch InputVar {
 		case 1:
@@ -135,7 +131,10 @@ if (ErrorLevel = "Match") {
 		Movespeed := 3.75
 		case 7:
 		Interval := 0.2500 ; 4
-		Movespeed := 4.00	
+		Movespeed := 4.00
+		case 8:
+		Interval := 0.2000 ; 5
+		Movespeed := 5.00	
 	}
 	SendShell()
 }
@@ -158,6 +157,25 @@ SendShell() {
 	SendInput % str
 	return
 }
+
+; Suppresive Barrage Rockets
+b::
+DisableHotkeys := true
+DisableInventory := true
+Input, InputVar, L1 T1,,1,2,3,4,5,b
+if (ErrorLevel = "Match") {
+	if (InputVar = "b") {
+		Input, InputVar2, L1 T1,,1,2,3,4,5
+		if (ErrorLevel = "Match") {
+			Rockets := (InputVar2*2)+12
+		}
+	}
+	else
+		Rockets := (InputVar*2)+2
+	SendInput % "{enter}-b " . Rockets . "{enter}"
+}
+DisableHotkeys := false
+DisableInventory := false
 
 #If ; End Shell mode code
 
