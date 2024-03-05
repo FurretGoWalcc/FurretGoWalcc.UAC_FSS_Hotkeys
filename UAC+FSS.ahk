@@ -176,6 +176,7 @@ if (ErrorLevel = "Match") {
 }
 DisableHotkeys := false
 DisableInventory := false
+return
 
 #If ; End Shell mode code
 
