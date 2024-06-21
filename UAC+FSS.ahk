@@ -1,4 +1,4 @@
-﻿#NoEnv
+#NoEnv
 #KeyHistory 0
 ListLines Off
 InvMode := false
@@ -141,11 +141,38 @@ if (ErrorLevel = "Match") {
 DisableInventory := false
 return
 
+; Time-Controlled Stationary Shelling
+v::
+DisableHotkeys := true
+DisableInventory := true
+Input, InputVar, L1 T1,,1,2,3,4,5,6,7,8,v
+if (ErrorLevel = "Match") {
+	if InputVar is Integer
+	{
+		Interval := InputVar
+		Movespeed := Round(1/Interval,4)
+		Angle := "c"
+	}
+	else {
+		SendInput v
+		DisableHotkeys := false
+		DisableInventory := false
+		return
+	}
+	SendShell()
+}
+DisableHotkeys := false
+DisableInventory := false
+return
+
 SendShell() {
 	global
 	if(Tracking) {
 		if(Angle="c") {
-			str := "{enter}-c " . Shell . " c 0.2 " . Radius . "     5.00 Stationary{enter}"
+			if(Interval < 1)
+				str := "{enter}-c " . Shell . " c 0.2 " . Radius . "     5.00 Stationary{enter}"
+			else
+				str := "{enter}-c " . Shell . " c " . Interval . " " . Radius . "     " . Movespeed . " Stationary{enter}"
 		}
 		else {
 			str := "{enter}-c " . Shell . " " . Angle . " " . Interval . " " . Radius . "     " . Movespeed . " " . Cardinal . "{enter}" 
@@ -155,6 +182,7 @@ SendShell() {
 		str := "{enter}-c " . Shell . " " . Angle . " 0.2 2.4      " . Cardinal . " Saturation{enter}"
 	}
 	SendInput % str
+	SendInput % "{enter}-a " . Angle . "{enter}"
 	return
 }
 
