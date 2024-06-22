@@ -13,8 +13,8 @@ I've included a couple general hotkeys with this script which have been helpful 
 	4. `Ctrl+alt+d` disables and enables `2` inventory hotkey, so it is always available for control groups (like group one). Helpful when playing classes like JTAC/Ghost who needs control group two open for heli and ion, or for BBs. Activate this like you would `ctrl+alt+del`
 
 ## Shelling
-These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled when the program is started**. You can toggle them On/Off by pressing `ctrl+alt+s`, activate this like you would `ctrl+alt+del`.
-**Note**: Most hotkeys in this guide are notated with `key+#`. Unless otherwise specified, these are sequential hotkeys- you do *not* have to hold the key at the same time as the number. Press and release the key, then press the number you wish.
+- These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled when the program is started**. You can toggle them On/Off by pressing `ctrl+alt+s`, activate this like you would `ctrl+alt+del`.
+- **Note**: Hotkeys in this guide are notated with `key+#`. Unless otherwise specified, these are sequential hotkeys- press, release, and move to the next key in the sequence.
 
 ![](shellmodehotkeys.png)
 
@@ -23,8 +23,8 @@ These hotkeys control FSS's shelling parameters. **Shelling hotkeys are disabled
 - Use `s+s+#` to get more than 5 shells, Ex: entering `ss`, then `1` would send 6 shells, `ss`, then `2` would send 7, etc.
 
 <u> Interval/Movespeed</u>: 
-Use `caps-lock+#` to set movespeed of the shell.
-There is two intervals that can be set (and will store their value independently)
+- Use `caps-lock+#` to set movespeed of the shell.
+- There is two intervals that can be set (and will store their value independently)
 1. Tracking (moving) shells. This is designed to match the speed of some zombie.
 	- Because interval is unintuitive, I've abstracted it away. Pressing `caps+1` gives you an interval that makes your shells move at 2.5 movespeed, and then each number greater than 1 increases it by 0.25 movespeed. Ex: `caps+7` gives 4 movespeed shells.
 	- For those uninitiated in the greater theory of shellonomics, most things move around 3.00 movespeed, so start at `caps+3` and adjust as needed.
@@ -43,8 +43,8 @@ There is two intervals that can be set (and will store their value independently
 - When direction is set with `g`, it will also send out a line to change the A-10 direction to the same (Ex: `g+a` will send `-a 180`)
 
 <u> Shelling Mode</u>: 
-To toggle between modes, press the grave key (the weird 'apostrophe' that is to the right of 1 key and above tab).
-There are two shell modes: Tracking and Saturation.
+- To toggle between modes, press the grave key (the weird 'apostrophe' that is to the right of 1 key and above tab).
+- There are two shell modes: Tracking and Saturation.
 1. Tracking is best suited for shelling accurately or having your shells "track" a target. This is the default mode.
 2. Saturation is all about getting shells on the ground quickly to hit low HP targets and lower IL. 
 	- Here is a rough Desmos graph of what saturation looks like:
