@@ -8,7 +8,8 @@ Angle := 0
 Cardinal := "E"
 Shell := 1
 Radius := 1
-Interval := 0.3333
+Interval := 0.3333 ; Set by the `CapsLock` hotkey
+StationaryInterval := 0.2000 ; Set by the 'v' hotkey
 Movespeed := 3.00
 Rockets := 0
 
@@ -91,8 +92,12 @@ if (ErrorLevel = "Match") {
 		case "a":
 		Angle := "180"
 		Cardinal := "W "
-		case "s":
-		Angle := "c"
+		case "s": {
+			Angle := "c"
+			SendShell()
+			DisableHotkeys := false
+			return
+		}
 		Cardinal := "  "
 		case "g": {
 			SendInput g
@@ -100,6 +105,7 @@ if (ErrorLevel = "Match") {
 			return
 		}
 	}
+	SendInput % "{enter}-a " . Angle . "{enter}"
 	SendShell()
 }
 DisableHotkeys := false
@@ -110,79 +116,61 @@ CapsLock::
 DisableInventory := true
 Input, InputVar, L1 T1,,,1,2,3,4,5,6,7,8
 if (ErrorLevel = "Match") {
-	switch InputVar {
-		case 1:
-		Interval := 0.4000 ; 2.50
-		Movespeed := 2.50
-		case 2:
-		Interval := 0.3636 ; 2.75
-		Movespeed := 2.75
-		case 3:
-		Interval := 0.3333 ; 3
-		Movespeed := 3.00
-		case 4:
-		Interval := 0.3077 ; 3.25
-		Movespeed := 3.25
-		case 5:
-		Interval := 0.2857 ; 3.5
-		Movespeed := 3.50
-		case 6:
-		Interval := 0.2667 ; 3.75
-		Movespeed := 3.75
-		case 7:
-		Interval := 0.2500 ; 4
-		Movespeed := 4.00
-		case 8:
-		Interval := 0.2000 ; 5
-		Movespeed := 5.00	
+	if(Angle = "c") {
+		if(InputVar = 1) {
+			StationaryInterval := 0.2
+		}
+		else {
+			StationaryInterval := InputVar - 1
+		}
+	}
+	else {
+		switch InputVar {
+			case 1:
+			Interval := 0.4000 ; 2.50
+			Movespeed := 2.50
+			case 2:
+			Interval := 0.3636 ; 2.75
+			Movespeed := 2.75
+			case 3:
+			Interval := 0.3333 ; 3
+			Movespeed := 3.00
+			case 4:
+			Interval := 0.3077 ; 3.25
+			Movespeed := 3.25
+			case 5:
+			Interval := 0.2857 ; 3.5
+			Movespeed := 3.50
+			case 6:
+			Interval := 0.2667 ; 3.75
+			Movespeed := 3.75
+			case 7:
+			Interval := 0.2500 ; 4
+			Movespeed := 4.00
+			case 8:
+			Interval := 0.2000 ; 5
+			Movespeed := 5.00	
+		}
 	}
 	SendShell()
 }
 DisableInventory := false
 return
 
-; Time-Controlled Stationary Shelling
-v::
-DisableHotkeys := true
-DisableInventory := true
-Input, InputVar, L1 T1,,1,2,3,4,5,6,7,8,v
-if (ErrorLevel = "Match") {
-	if InputVar is Integer
-	{
-		Interval := InputVar
-		Movespeed := Round(1/Interval,4)
-		Angle := "c"
-	}
-	else {
-		SendInput v
-		DisableHotkeys := false
-		DisableInventory := false
-		return
-	}
-	SendShell()
-}
-DisableHotkeys := false
-DisableInventory := false
-return
+
 
 SendShell() {
 	global
 	if(Tracking) {
-		if(Angle="c") {
-			if(Interval < 1)
-				str := "{enter}-c " . Shell . " c 0.2 " . Radius . "     5.00 Stationary{enter}"
-			else
-				str := "{enter}-c " . Shell . " c " . Interval . " " . Radius . "     " . Movespeed . " Stationary{enter}"
-		}
-		else {
-			str := "{enter}-c " . Shell . " " . Angle . " " . Interval . " " . Radius . "     " . Movespeed . " " . Cardinal . "{enter}" 
-		}
+		if(Angle="c")
+			str := "{enter}-c " . Shell . " c " . StationaryInterval . " " . Radius . "          Stationary{enter}"
+		else
+			str := "{enter}-c " . Shell . " " . Angle . " " . Interval . " " . Radius . "     " . Movespeed . " " . Cardinal . "{enter}"
 	}
 	else {
 		str := "{enter}-c " . Shell . " " . Angle . " 0.2 2.4      " . Cardinal . " Saturation{enter}"
 	}
 	SendInput % str
-	SendInput % "{enter}-a " . Angle . "{enter}"
 	return
 }
 
