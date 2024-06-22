@@ -1,14 +1,3 @@
----
-aliases: []
-creation date: 2024-06-21 23:17
-modification date: Friday 21st June 2024 23:17:37
----
-
-> He who lives in harmony with himself lives in harmony with the universe.
-> — <cite>Marcus Aurelius</cite>
-
-
-
 This is basically a bunch of hotkeys I've compiled to help with playing FSS and UAC in general.
 # Hotkeys
 ## General
