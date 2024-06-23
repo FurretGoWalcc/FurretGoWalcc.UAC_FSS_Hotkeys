@@ -106,6 +106,7 @@ if (ErrorLevel = "Match") {
 		}
 	}
 	SendInput % "{enter}-a " . Angle . "{enter}"
+	Sleep 10
 	SendShell()
 }
 DisableHotkeys := false
